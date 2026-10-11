@@ -1,7 +1,7 @@
 import { pedirDato,pedirFecha,pausa,pedirNumero } from "./entrada.ts";
 import { Tarea } from "./tipos.ts";
 import {control,resolverEdicion,resolverFecha} from "./validaciones.ts"
-import {imprimirtarea,mostrarCampo} from "./mostrar.ts";
+import {imprimirtarea} from "./mostrar.ts";
 
 export async function agregarTarea():Promise<Tarea> 
     {
@@ -35,7 +35,7 @@ export async function agregarTarea():Promise<Tarea>
         {
             ultimaEdicionFinal=null;
         }
-    
+        // ahora llamamos al constructor 
        let nuevaTarea = new Tarea(
             titulous,
             descripcionus,
@@ -102,14 +102,7 @@ export async function verDetalleTarea(listaDeTareas: Tarea[],indice: number): Pr
             console.log("Tarea no encontrada.\n");
             return;
         }
-        console.log("Esta es la tarea que elegiste: \n");
-        console.log(`Titulo: ${listaDeTareas[indice-1].titulo} \n`);
-        console.log(`Dificultad: ${listaDeTareas[indice-1].dificultad} \n`);
-        mostrarCampo("Descripcion", listaDeTareas[indice-1].descripcion);
-        console.log(`Estado: ${listaDeTareas[indice-1].estado} \n`);
-        mostrarCampo("Fecha de creacion", listaDeTareas[indice-1].fechaCreacion);
-        mostrarCampo("Ultima edicion", listaDeTareas[indice-1].ultimaEdicion);
-        mostrarCampo("Fecha de vencimiento", listaDeTareas[indice-1].fechaVencimiento);
+        await listaDeTareas[indice-1].mostrarDetalle();  //Ahora a cada instancia de la tarea tiene su propio comportamiento de mostrar sus atributos
         console.log("Si deseas editarla presione E o 0 para volver. \n");
         let entrada =await pedirDato( ">  \n", ["E","0"],true);
         if(entrada==="0")

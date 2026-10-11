@@ -1,7 +1,6 @@
 import { pedirNumero } from "./entrada.ts"
 import {verDetalleTarea} from "./operaciones.ts";
 import type { Tarea } from "./tipos.ts";
-import {esvacio} from "./validaciones.ts";
 
 
 export async function imprimirtarea(listaDeTareas: Tarea[],condicion: string | null,buscar:string | null): Promise<void>
@@ -61,18 +60,4 @@ export async function imprimirtarea(listaDeTareas: Tarea[],condicion: string | n
         }
 
         await verDetalleTarea(tareasFiltradas, indice);
-    }
-
-
-export function mostrarCampo(mensaje: string,valor:string | Date| null )
-    {
-        if(esvacio(valor))
-        {
-            console.log(`${mensaje}: Sin datos \n`);
-            return;
-        }
-        else
-        {
-        console.log(`${mensaje}: ${valor} \n`);  
-        }
     }
